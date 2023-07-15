@@ -11,6 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@ToString
 public class VueloDTO {
 
 
@@ -32,18 +33,4 @@ public class VueloDTO {
 
     private AvionDTO avion;
 
-    @Override
-    public String toString() {
-        return "VueloDTO{" +
-                "idVuelo=" + idVuelo +
-                ", fechaDePartida=" + fechaDePartida +
-                ", fechaDeLlegada=" + fechaDeLlegada +
-                ", origen='" + origen + '\'' +
-                ", destino='" + destino + '\'' +
-                ", tieneConexion=" + tieneConexion +
-                ", cantidadDeAsientosDisponibles=" + cantidadDeAsientosDisponibles +
-                ", asientosVuelo=" + asientosVuelo +
-                ", avion=" + avion +
-                '}';
-    }
 }

@@ -2,6 +2,7 @@ package com.consultas.proyecto.service;
 
 
 import com.consultas.proyecto.dto.*;
+import com.consultas.proyecto.exception.NotFoundException;
 import com.consultas.proyecto.model.*;
 import com.consultas.proyecto.repository.MetodoDePagoRepository;
 import com.consultas.proyecto.repository.ReservaRepository;
@@ -20,10 +21,10 @@ import java.util.stream.Collectors;
 @Service
 public class ReservaService {
 
-    private final ReservaRepository reservaRepository;
-    private final MetodoDePagoRepository metodoDePagoRepository;
-    private final UsuarioRepository usuarioRepository;
-    private final VueloRepository vueloRepository;
+    private ReservaRepository reservaRepository;
+    private MetodoDePagoRepository metodoDePagoRepository;
+    private UsuarioRepository usuarioRepository;
+    private VueloRepository vueloRepository;
 
     public ReservaService(ReservaRepository reservaRepository, MetodoDePagoRepository metodoDePagoRepository, UsuarioRepository usuarioRepository, VueloRepository vueloRepository) {
         this.reservaRepository = reservaRepository;
@@ -36,9 +37,9 @@ public class ReservaService {
     public List<DetalleAsientosPedidosDTO> crearReserva(ReservaDTO reservaDTO) {
 
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Usuario usuario = this.usuarioRepository.findByMail(userDetails.getUsername()).orElseThrow(() -> new RuntimeException("No se encontro usuario"));
-        MetodoDePago metodoDePago = this.metodoDePagoRepository.findByNombreMetodoDePago(reservaDTO.getMetodoDePago()).orElseThrow(() -> new RuntimeException("no existe metodo de pago"));
-        Vuelo vuelo = this.vueloRepository.findById(reservaDTO.getIdVuelo()).orElseThrow(() -> new RuntimeException("no se encontro vuelo"));
+        Usuario usuario = this.usuarioRepository.findByMail(userDetails.getUsername()).orElseThrow(() -> new NotFoundException("No se encontro usuario"));
+        MetodoDePago metodoDePago = this.metodoDePagoRepository.findByNombreMetodoDePago(reservaDTO.getMetodoDePago()).orElseThrow(() -> new NotFoundException("no existe metodo de pago"));
+        Vuelo vuelo = this.vueloRepository.findById(reservaDTO.getIdVuelo()).orElseThrow(() -> new NotFoundException("no se encontro vuelo"));
         List<DetalleAsientosPedidosDTO> detalleAsientosPedidos = new ArrayList<>();
         List<AsientoVuelo> asientosQueFueronReservados = new ArrayList<>();
         this.guardarAsientosCoincidentes(vuelo.getAsientosVuelo(), reservaDTO.getIdVuelo(),reservaDTO.getAsientos(), detalleAsientosPedidos, asientosQueFueronReservados);
@@ -53,14 +54,14 @@ public class ReservaService {
             reservaRepository.save(reserva);
             return detalleAsientosPedidos;
         } else {
-            throw new RuntimeException("No se pudo reservar ningun asiento todos estaban ocupados");
+            throw new NotFoundException("No se pudo reservar ningun asiento todos estaban ocupados");
         }
 
     }
 
     public HistorialReservasDTO verReservasDeUnUsuario(Long idUsuario){
 
-        Usuario usuario = usuarioRepository.findById(idUsuario).orElseThrow(() -> new RuntimeException("No existe usuario con id: "+idUsuario));
+        Usuario usuario = usuarioRepository.findById(idUsuario).orElseThrow(() -> new NotFoundException("No existe usuario con id: "+idUsuario));
 
         List<Vuelo> vuelos = usuario.getReservas().stream()  // Stream de reservas
                 .flatMap(reserva -> reserva.getAsientosVuelos().stream())  // Stream de asientos de avión de las reservas
@@ -73,6 +74,13 @@ public class ReservaService {
         List<VueloReservaDTO> vuelosDTO = vuelos.stream().map(vuelo -> {
             VueloReservaDTO vueloReservaDTO = mapper.map(vuelo, VueloReservaDTO.class);
             vuelo.getAsientosVuelo().stream().findFirst().ifPresent(asientoVuelo -> {
+                System.out.println(asientoVuelo.getReserva().getMetodoDePago());
+                System.out.println(asientoVuelo.getReserva().getMetodoDePago());
+                System.out.println(asientoVuelo.getReserva().getMetodoDePago());
+                System.out.println(asientoVuelo.getReserva().getMetodoDePago());
+                System.out.println(asientoVuelo.getReserva().getMetodoDePago());
+                System.out.println(asientoVuelo.getReserva().getMetodoDePago());
+
                 vueloReservaDTO.setAvion(mapper.map(asientoVuelo.getAsiento().getAvion(), AvionDTO.class));
                 vueloReservaDTO.setMetodoDePago(asientoVuelo.getReserva().getMetodoDePago().getNombreMetodoDePago().toString());
             });

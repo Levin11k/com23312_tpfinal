@@ -41,13 +41,5 @@ class VueloControllerTest {
                     .andExpect(MockMvcResultMatchers.jsonPath("$[1].tieneConexion").value("true"))
                     .andReturn();
             System.out.println(mvcResult.getResponse().getContentAsString());
-     /*   void intTest()throws Exception{
-            MvcResult mvcResult = mockMvc.perform(get("/getAllUsers"))
-                    .andExpect(status().isOk())
-                    .andExpect(content().contentType("application/json"))
-                    .andExpect(MockMvcResultMatchers.jsonPath("$[1].nombre").value("Carlos"))
-                    .andReturn();
-
-            System.out.println(mvcResult.getResponse().getContentAsString());*/
         }
     }

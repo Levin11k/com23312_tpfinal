@@ -21,7 +21,6 @@ public class Aerolinea {
     private String nombre;
 
     @OneToMany(mappedBy = "aerolinea", cascade = CascadeType.ALL)
-    @JsonBackReference
     private List<Avion> aviones;
 
     public Aerolinea(String nombre) {

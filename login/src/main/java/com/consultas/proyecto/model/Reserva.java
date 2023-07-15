@@ -26,12 +26,10 @@ public class Reserva {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_metodo_de_pago", nullable = false)
-    @JsonManagedReference
     private MetodoDePago metodoDePago;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_usuario", nullable = false)
-    @JsonBackReference
     private Usuario usuario;
 
     @OneToMany(mappedBy = "reserva", cascade = CascadeType.ALL)

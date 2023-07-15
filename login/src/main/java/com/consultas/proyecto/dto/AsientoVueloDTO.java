@@ -8,6 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@ToString
 public class AsientoVueloDTO {
 
 
@@ -19,12 +20,4 @@ public class AsientoVueloDTO {
 
     private Double precio;
 
-    @Override
-    public String toString() {
-        return "AsientoVueloDTO{" +
-                "asiento=" + asiento +
-                ", estaLibre=" + estaLibre +
-                ", precio=" + precio +
-                '}';
-    }
 }

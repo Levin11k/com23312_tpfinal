@@ -7,17 +7,11 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@ToString
 public class AvionDTO {
 
     private String codigo;
 
     private AerolineaDTO aerolinea;
 
-    @Override
-    public String toString() {
-        return "AvionDTO{" +
-                "codigo='" + codigo + '\'' +
-                ", aerolinea=" + aerolinea +
-                '}';
-    }
 }

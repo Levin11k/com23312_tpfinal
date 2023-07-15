@@ -2,10 +2,7 @@ package com.consultas.proyecto.listener;
 
 import com.consultas.proyecto.enums.EMetodosDePago;
 import com.consultas.proyecto.model.*;
-import com.consultas.proyecto.repository.MetodoDePagoRepository;
-import com.consultas.proyecto.repository.RoleRepository;
-import com.consultas.proyecto.repository.UsuarioRepository;
-import com.consultas.proyecto.repository.VueloRepository;
+import com.consultas.proyecto.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -33,6 +30,9 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
 	@Autowired
 	private MetodoDePagoRepository metodoDePagoRepository;
+
+	@Autowired
+	private ReservaRepository reservaRepository;
 	
 	@Override
 	@Transactional
@@ -80,8 +80,8 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 		usuarioAgenteDeVentas.setPassword(passwordEncoder.encode("matias"));
 		usuarioAgenteDeVentas.setActivo(true);
 		Set<Role> perfilesAgenteDeVentas = new HashSet<>();
-		perfilesAdmin.add(perfilUsuario);
-		perfilesAdmin.add(perfilAgenteDeVentas);
+		perfilesAgenteDeVentas.add(perfilUsuario);
+		perfilesAgenteDeVentas.add(perfilAgenteDeVentas);
 		usuarioAgenteDeVentas.setRoles(perfilesAgenteDeVentas);
 		if(!usuarioRepository.findByNombre(usuarioAgenteDeVentas.getNombre()).isPresent())
 			usuarioRepository.save(usuarioAgenteDeVentas);
@@ -165,7 +165,6 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
 		metodoDePagoRepository.save(new MetodoDePago(EMetodosDePago.TARJETA_DE_CREDITO, 20D));
 		metodoDePagoRepository.save(new MetodoDePago(EMetodosDePago.TRANSFERENCIA_BANCARIA, 10D));
-
 
 		alreadySetup = true;
 	}

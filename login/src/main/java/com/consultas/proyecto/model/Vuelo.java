@@ -33,7 +33,6 @@ public class Vuelo {
     @Column(name = "tiene_conexion", nullable = false)
     private Boolean tieneConexion;
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "vuelo", cascade = CascadeType.ALL)
     private List<AsientoVuelo> asientosVuelo;
 

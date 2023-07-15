@@ -1,0 +1,11 @@
+
+Z	java:S112%"FDefine and throw a dedicated exception instead of using a generic one.(Ù›e
+`	java:S112="FDefine and throw a dedicated exception instead of using a generic one.(¦¢ë©ıÿÿÿÿ
+S
+java:S1854,"8Remove this useless assignment to local variable "user".(ÚÒßşÿÿÿÿ
+;
+java:S1452%"&Remove usage of generic wildcard type.(Ù›e
+D
+java:S1481,")Remove this unused "user" local variable.(ÚÒßşÿÿÿÿ
+A
+java:S1452="&Remove usage of generic wildcard type.(¦¢ë©ıÿÿÿÿ

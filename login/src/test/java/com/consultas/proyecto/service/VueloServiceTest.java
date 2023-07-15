@@ -97,7 +97,10 @@ public class VueloServiceTest {
 
         when(vueloRepository.findAll()).thenReturn(listaMock);
         //act
+
+        List<VueloDTO> result = vueloService.mostrarVuelos();
+
         //assert
-        assertThrows(NotFoundException.class,()->vueloService.mostrarVuelos());
+        assertTrue(result.isEmpty());
     }
 }

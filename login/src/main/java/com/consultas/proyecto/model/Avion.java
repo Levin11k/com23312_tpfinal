@@ -23,12 +23,10 @@ public class Avion {
     private String codigo;
 
     @OneToMany(mappedBy = "avion", cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<Asiento> asientos;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_aerolinea", nullable = false)
-    @JsonManagedReference
     private Aerolinea aerolinea;
 
     public Avion(String codigo, Aerolinea aerolinea) {

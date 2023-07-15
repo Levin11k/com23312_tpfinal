@@ -1,12 +1,13 @@
 package com.consultas.proyecto.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
-@Data
+@AllArgsConstructor
+@EqualsAndHashCode
+@ToString
 public class ErrorDTO {
     private String message;
 }

@@ -7,16 +7,10 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@ToString
 public class AsientoDTO {
 
     private String fila;
     private String columna;
 
-    @Override
-    public String toString() {
-        return "AsientoDTO{" +
-                "fila='" + fila + '\'' +
-                ", columna='" + columna + '\'' +
-                '}';
-    }
 }

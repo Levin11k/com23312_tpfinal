@@ -23,15 +23,13 @@ public class AsientoVuelo {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_asiento")
-    @JsonManagedReference
     private Asiento asiento;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_vuelo")
-    @JsonBackReference
     private Vuelo vuelo;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_reserva")
     private Reserva reserva;
 

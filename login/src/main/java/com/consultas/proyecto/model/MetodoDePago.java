@@ -28,7 +28,6 @@ public class MetodoDePago {
     private Double descuento;
 
     @OneToMany(mappedBy = "metodoDePago", cascade = CascadeType.ALL)
-    @JsonBackReference
     private List<Reserva> reservas;
 
     public MetodoDePago(EMetodosDePago nombreMetodoDePago, Double descuento) {

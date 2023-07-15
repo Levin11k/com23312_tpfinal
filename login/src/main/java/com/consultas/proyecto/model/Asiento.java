@@ -30,12 +30,10 @@ public class Asiento {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_avion")
-    @JsonBackReference
     private Avion avion;
 
 
     @OneToMany(mappedBy = "asiento", cascade = CascadeType.ALL)
-    @JsonBackReference
     private List<AsientoVuelo> vuelos;
 
     public Asiento(String fila, String columna, Boolean estaApto, Avion avion) {
